@@ -19,6 +19,12 @@
         <h4>内容：</h4>
         <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
     </div>
+    <div style="padding-top: 10px;">
+        计划数：<input type="text" id="plan">
+    </div>
+    <div style="padding-top: 10px;padding-bottom: 10px;">
+        单&nbsp;&nbsp;&nbsp;价：<input type="text" id="price">
+    </div>
 </div>
 <button onclick="getContent()">保存</button>
 
@@ -58,10 +64,12 @@
         }
         arr.push(UE.getEditor('editor').getContent());
         var content = arr.join("\n");
+        var plan = $("#plan").val();
+        var price = $("#price").val();
         $.ajax({
             type : 'post',
             url : 'index.php?r=step/add_ajax',
-            data : {'content' : content, 'title' : title},
+            data : {'content' : content, 'title' : title, 'plan' : plan, 'price' : price},
             success : function(data){
                 if(data == 111){
                     alert("操作成功！");

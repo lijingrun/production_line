@@ -68,6 +68,7 @@ class StepController extends Controller{
             $content = $_POST['content'];
             $title = $_POST['title'];
             $step_id = $_POST['step_id'];
+            $plan = $_POST['plan'];
             if(!empty($content)){
                 if(!empty($step_id)){
                     $step = Step::find()->where("step_id =".$step_id)->one();
@@ -78,6 +79,8 @@ class StepController extends Controller{
                 $step->add_time = time();
                 $step->content = $content;
                 $step->title = $title;
+                $step->plan = $plan;
+                $step->price = $_POST['price'];
                 if($step->save()){
                     echo 111;
                 }else{
