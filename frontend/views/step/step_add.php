@@ -25,6 +25,14 @@
     <div style="padding-top: 10px;padding-bottom: 10px;">
         单&nbsp;&nbsp;&nbsp;价：<input type="text" id="price">
     </div>
+    <div style="padding-top: 10px;padding-bottom: 10px;">
+        类&nbsp;&nbsp;&nbsp;型：
+        <select id="type">
+            <?php foreach($types as $type): ?>
+            <option value="<?php echo $type['id']?>"><?php echo $type['name']?></option>
+            <?php endforeach; ?>
+        </select>
+    </div>
 </div>
 <button onclick="getContent()">保存</button>
 
@@ -66,10 +74,11 @@
         var content = arr.join("\n");
         var plan = $("#plan").val();
         var price = $("#price").val();
+        var type_id = $("#type").val();
         $.ajax({
             type : 'post',
             url : 'index.php?r=step/add_ajax',
-            data : {'content' : content, 'title' : title, 'plan' : plan, 'price' : price},
+            data : {'content' : content, 'title' : title, 'plan' : plan, 'price' : price, 'type_id' : type_id},
             success : function(data){
                 if(data == 111){
                     alert("操作成功！");

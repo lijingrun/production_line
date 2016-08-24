@@ -8,6 +8,7 @@
 namespace frontend\controllers;
 
 use common\models\Step;
+use common\models\Type;
 use common\models\Worker_step;
 use Yii;
 use yii\web\Controller;
@@ -16,6 +17,7 @@ use yii\web\Controller;
 class IndexController extends Controller{
 
     public $enableCsrfValidation = false;
+    public $layout = 'main2';
 
     public function actionIndex(){
         if(Yii::$app->request->post()){
@@ -41,10 +43,10 @@ class IndexController extends Controller{
 //            }
 //            return $this->redirect('');
         }else {
-            $steps = Step::find()->asArray()->orderBy('add_time')->all();
-
+//            $steps = Step::find()->asArray()->orderBy('add_time')->all();
+            $types = Type::find()->asArray()->all();
             return $this->render('index', [
-                'steps' => $steps,
+                'types' => $types,
             ]);
         }
     }
@@ -80,6 +82,18 @@ class IndexController extends Controller{
             }else{
                 echo 222;
             }
+            exit;
+        }
+    }
+
+    public function actionGet_type(){
+        $type_id = $_POST['type'];
+        if(!empty($type_id)){
+            $step = Step::find()->where("type_id =".$type_id)->asArray()->all();
+            echo "<option value='0'>选择组件</option>";
+            foreach($step as $val):
+                echo "<option value='".$val['step_id']."'>".$val['title']."</option>";
+            endforeach;
             exit;
         }
     }

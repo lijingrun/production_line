@@ -59,18 +59,33 @@
             });
         }
     }
+    function get_type(){
+        var type = $("#type_list").val();
+        $("step_list").html("");
+        if(type != 0){
+            $.ajax({
+                type : 'post',
+                url : 'index.php?r=index/get_type',
+                data : {'type' : type},
+                success : function(data){
+                    $("#step_list").html(data);
+//                    alert(data);
+                }
+            });
+        }
+    }
 </script>
 <style>
     .div1{
         border : solid 1px #A1A1A1;
         padding:10px;
         overflow:hidden;
-        height:420px;
+        height:500px;
     }
     .div2{
         border : solid 1px #A1A1A1;
         padding:10px ;
-        height:420px;
+        height:500px;
     }
     .p1{
         padding:10px 10px 10px 30px;
@@ -83,19 +98,19 @@
 </style>
 <div style="padding-top:20px;">
     <div class="row">
-        <div class="col-xs-8">
+        <div class="col-xs-9">
             <div class="div1">
                 <div style="width: 100%;height:410px;" id="content">
                     <h1 align="center">操作规范</h1>
                 </div>
             </div>
         </div>
-        <div class="col-xs-4">
+        <div class="col-xs-3">
 <!--            <form method="post">-->
             <div class="div2">
                 <p class="p1">
                     计&nbsp;划：
-                    <input type="text" value="0" id="plan" name="plan"/>
+                    <input type="text" value="0" id="plan" name="plan" readonly="readonly" />
                 </p>
                 <p class="p1">
                     实&nbsp;际：
@@ -107,15 +122,21 @@
                 </p>
                 <p class="p1">
                     累&nbsp;计：
-                    <input type="text" id="total" value="0" />
+                    <input type="text" id="total" value="0" readonly="readonly" />
+                </p>
+                <p class="p1">
+                    类&nbsp;型：
+                    <select onchange="get_type();" id="type_list" >
+                        <option value="0">组件类型</option>
+                        <?php foreach($types as $type): ?>
+                        <option value="<?php echo $type['id']?>"><?php echo $type['name']?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </p>
                 <p class="p1">
                     组&nbsp;件：
                     <select onchange="get_step();" id="step_list" name="step_id">
-                        <option value="0">请选择组件</option>
-                        <?php foreach($steps as $step): ?>
-                        <option value="<?php echo $step['step_id'];?>"><?php echo $step['title'];?></option>
-                        <?php endforeach; ?>
+                        <option value="0">选择组件</option>
                     </select>
                 </p>
                 <p class="p1">
@@ -123,7 +144,6 @@
                     <input type="text" id="worker_no" name="worker_no" />
                 </p>
                 <div align="right" style="font-size: 18px;">
-                    <span style="color:red;">*每天以最后一次提交为准*</span>
                     <input type="button" value="提交" onclick="submit_data();"  class="btn-success" style="padding-left: 20px;padding-right: 20px;" />
                 </div>
             </div>

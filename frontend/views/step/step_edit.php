@@ -20,12 +20,27 @@
     </div>
     <div>
         <h4>内容：</h4>
-        <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+        <script id="editor" type="text/plain" style="width:1024px;height:500px;"><?php echo $step['content']?></script>
+    </div>
+    <div style="padding-top: 10px;">
+        计划数：<input type="text" id="plan" value="<?php echo $step['plan']?>"
+    </div>
+    <div style="padding-top: 10px;padding-bottom: 10px;">
+        单&nbsp;&nbsp;&nbsp;价：<input type="text" id="price" value="<?php echo $step['price']?>">
+    </div>
+    <div style="padding-top: 10px;padding-bottom: 10px;">
+        类&nbsp;&nbsp;&nbsp;型：
+        <select id="type">
+            <?php foreach($types as $type): ?>
+                <option value="<?php echo $type['id']?>" <?php if($step['type_id'] == $type['id']){ echo "selected";} ?>>
+                    <?php echo $type['name']?>
+                </option>
+            <?php endforeach; ?>
+        </select>
     </div>
 </div>
 <button onclick="getContent()">保存</button>
 <button onclick="del_step(<?php echo $step['step_id']?>)" >删除组件</button>
-<button onclick="setContent()" id="init">写入内容</button>
 
 
 <script type="text/javascript">
@@ -64,10 +79,13 @@
         arr.push(UE.getEditor('editor').getContent());
         var content = arr.join("\n");
         var step_id = <?php echo $step['step_id'];?>;
+        var plan = $("#plan").val();
+        var price = $("#price").val();
+        var type_id = $("#type").val();
         $.ajax({
             type : 'post',
             url : 'index.php?r=step/add_ajax',
-            data : {'content' : content, 'title' : title, 'step_id' : step_id},
+            data : {'content' : content, 'title' : title, 'step_id' : step_id , 'plan' : plan, 'price' : price, 'type_id' : type_id},
             success : function(data){
                 if(data == 111){
                     alert("操作成功！");
@@ -182,5 +200,5 @@
             });
         }
     }
-    var t=setTimeout("setContent()",100);
+//    var t=setTimeout("setContent()",100);
 </script>

@@ -49,8 +49,8 @@ AppAsset::register($this);
 //        ['label' => '统计', 'url' => ['/statistics']],
 //        ['label' => '主页', 'url' => ['/interface']]
 //        ['label' => '主页', 'url' => ['/index']],
-        ['label' => '组件', 'url' => ['/step']],
-        ['label' => '统计', 'url' => ['/statistics']],
+//        ['label' => '组件', 'url' => ['/step']],
+//        ['label' => '统计', 'url' => ['/statistics']],
     ];
 //    if (Yii::$app->user->isGuest) {
 ////        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
