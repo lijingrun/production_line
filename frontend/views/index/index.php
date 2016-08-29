@@ -78,14 +78,14 @@
 <style>
     .div1{
         border : solid 1px #A1A1A1;
-        padding:10px;
+        /*padding:10px;*/
         overflow:hidden;
-        height:500px;
+        height:600px;
     }
     .div2{
         border : solid 1px #A1A1A1;
         padding:10px ;
-        height:500px;
+        height:600px;
     }
     .p1{
         padding:10px 10px 10px 30px;

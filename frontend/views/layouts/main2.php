@@ -25,16 +25,16 @@ AppAsset::register($this);
 <body>
 <?php $this->beginBody() ?>
 
-<div class="wrap">
+<div >
     <?php
-    NavBar::begin([
+//    NavBar::begin([
 //        'brandLabel' => '生产流水线',
 //        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = [
+//        'options' => [
+//            'class' => 'navbar-inverse navbar-fixed-top',
+//        ],
+//    ]);
+//    $menuItems = [
 //        ['label' => '工单', 'url' => ['/orders']],
 //        ['label' => '订单', 'url' => ['/goods_orders']],
 //        ['label' => '会员', 'url' => ['/member']],
@@ -51,7 +51,7 @@ AppAsset::register($this);
 //        ['label' => '主页', 'url' => ['/index']],
 //        ['label' => '组件', 'url' => ['/step']],
 //        ['label' => '统计', 'url' => ['/statistics']],
-    ];
+//    ];
 //    if (Yii::$app->user->isGuest) {
 ////        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
 //        $menuItems[] = ['label' => '登录', 'url' => ['/site/login']];
@@ -62,12 +62,12 @@ AppAsset::register($this);
 //            'linkOptions' => ['data-method' => 'post']
 //        ];
 //    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
+//    echo Nav::widget([
+//        'options' => ['class' => 'navbar-nav navbar-right'],
+//        'items' => $menuItems,
+//    ]);
+//    NavBar::end();
+//    ?>
 
     <div class="container">
         <?= Breadcrumbs::widget([
@@ -78,13 +78,13 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left"></p>
-
-        <p class="pull-right"></p>
-    </div>
-</footer>
+<!--<footer class="footer">-->
+<!--    <div class="container">-->
+<!--        <p class="pull-left"></p>-->
+<!---->
+<!--        <p class="pull-right"></p>-->
+<!--    </div>-->
+<!--</footer>-->
 
 <?php $this->endBody() ?>
 </body>
