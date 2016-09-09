@@ -7,6 +7,7 @@
  */
 namespace frontend\controllers;
 
+use common\models\Notice;
 use common\models\Step;
 use common\models\Type;
 use common\models\Worker_step;
@@ -44,9 +45,11 @@ class IndexController extends Controller{
 //            return $this->redirect('');
         }else {
 //            $steps = Step::find()->asArray()->orderBy('add_time')->all();
+            $notice = Notice::find()->asArray()->one();
             $types = Type::find()->asArray()->all();
             return $this->render('index', [
                 'types' => $types,
+                'notice' => $notice,
             ]);
         }
     }

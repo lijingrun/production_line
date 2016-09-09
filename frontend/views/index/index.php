@@ -118,7 +118,7 @@
                 </p>
                 <p class="p1">
                     不&nbsp;良：
-                    <input type="text" value="0" id="unhealthy_num" name="unhealthy_num" onblur="count_total();" />
+                    <input type="text" value="0" style="color:red;" id="unhealthy_num" name="unhealthy_num" onblur="count_total();" />
                 </p>
                 <p class="p1">
                     累&nbsp;计：
@@ -150,4 +150,7 @@
 <!--            </form>-->
         </div>
     </div>
+</div>
+<div style="color:red;">
+    <marquee direction="left" ><?php echo $notice['notice'];?></marquee>
 </div>

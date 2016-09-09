@@ -8,6 +8,7 @@
 
 namespace frontend\controllers;
 
+use common\models\Notice;
 use common\models\Step;
 use common\models\Type;
 use Yii;
@@ -15,6 +16,8 @@ use yii\web\Controller;
 
 
 class StepController extends Controller{
+
+    public $enableCsrfValidation = false;
 
     public function actionIndex(){
         $types = Type::find()->asArray()->all();
@@ -139,6 +142,30 @@ class StepController extends Controller{
                     echo 222;
                 }
             }
+        }
+    }
+
+    public function actionAdd_notice(){
+        if(Yii::$app->request->post()){
+            $notice_text = $_POST['notice'];
+            $notice = Notice::find()->one();
+            if(empty($notice)){
+                $notice = new Notice();
+                $notice->notice = $notice_text;
+            }else{
+                $notice->notice = $notice_text;
+            }
+            if($notice->save()){
+                Yii::$app->getSession()->setFlash('success','保存成功！');
+            }else{
+                Yii::$app->getSession()->setFlash('error','保存失败，请重新保存！');
+            }
+            return $this->redirect("index.php?r=step/add_notice");
+        }else{
+            $notice = Notice::find()->asArray()->one();
+            return $this->render("notice",[
+                'notice' => $notice,
+            ]);
         }
     }
 

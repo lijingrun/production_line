@@ -11,6 +11,8 @@
         var type = $("#type").val();
         if(type != 0){
             location.href="index.php?r=step&type_id="+type;
+        }else{
+            location.href="index.php?r=step"
         }
     }
 </script>
@@ -21,6 +23,9 @@
         </a>
         <a href="index.php?r=step/add_type">
             <button class="btn-info">组件类型</button>
+        </a>
+        <a href="index.php?r=step/add_notice">
+            <button class="btn-danger">添加公告</button>
         </a>
     </div>
     <div style="padding:10px;" align="center">
