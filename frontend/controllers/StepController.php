@@ -169,4 +169,16 @@ class StepController extends Controller{
         }
     }
 
+    public function actionDel_type(){
+        if(Yii::$app->request->post()){
+            $id = $_POST['id'];
+            if(!empty($id)){
+                if(Type::deleteAll("id =".$id)){
+                    echo 111;
+                    exit;
+                }
+            }
+        }
+    }
+
 }

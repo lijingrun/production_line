@@ -26,12 +26,12 @@
             $("#content").html("<h1 align=‘center’>操作规范</h1>");
         }
     }
-    function count_total(){
-        var actual_num = $("#actual_num").val();
-        var unhealthy_num = $("#unhealthy_num").val();
-        var total = parseInt(actual_num)+parseInt(unhealthy_num);
-        $("#total").val(total);
-    }
+//    function count_total(){
+//        var actual_num = $("#actual_num").val();
+//        var unhealthy_num = $("#unhealthy_num").val();
+//        var total = parseInt(actual_num)+parseInt(unhealthy_num);
+//        $("#total").val(total);
+//    }
     function submit_data(){
         var actual_num = $("#actual_num").val();
         var unhealthy_num = $("#unhealthy_num").val();
@@ -70,6 +70,23 @@
                 success : function(data){
                     $("#step_list").html(data);
 //                    alert(data);
+                }
+            });
+        }
+    }
+    function get_total(){
+        var worker_no = $("#worker_no").val();
+        var step_id = $("#step_list").val();
+//        alert(step_id);
+        if( step_id == 0){
+            alert("请先选择组件！");
+        }else{
+            $.ajax({
+                type : 'post',
+                url : 'index.php?r=index/get_total',
+                data : {'worker_no' : worker_no, 'step_id' : step_id},
+                success : function(data){
+                    $("#total").val(data);
                 }
             });
         }
@@ -141,9 +158,14 @@
                 </p>
                 <p class="p1">
                     工&nbsp;号：
-                    <input type="text" id="worker_no" name="worker_no" />
+                    <select id="worker_no" name="worker_no">
+                        <?php foreach($workers as $worker): ?>
+                        <option value="<?php echo $worker['worker_no']?>"><?php echo $worker['worker_no'];?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </p>
                 <div align="right" style="font-size: 18px;">
+                    <button class="btn-info" onclick="get_total();">计算总量</button>
                     <input type="button" value="提交" onclick="submit_data();"  class="btn-success" style="padding-left: 20px;padding-right: 20px;" />
                 </div>
             </div>

@@ -10,6 +10,7 @@ namespace frontend\controllers;
 use common\models\Notice;
 use common\models\Step;
 use common\models\Type;
+use common\models\Worker;
 use common\models\Worker_step;
 use Yii;
 use yii\web\Controller;
@@ -45,11 +46,13 @@ class IndexController extends Controller{
 //            return $this->redirect('');
         }else {
 //            $steps = Step::find()->asArray()->orderBy('add_time')->all();
+            $workers = Worker::find()->asArray()->all();
             $notice = Notice::find()->asArray()->one();
             $types = Type::find()->asArray()->all();
             return $this->render('index', [
                 'types' => $types,
                 'notice' => $notice,
+                'workers' => $workers,
             ]);
         }
     }
@@ -59,6 +62,23 @@ class IndexController extends Controller{
         $step = Step::find()->where("step_id =".$step_id)->asArray()->one();
         if(!empty($step)){
             echo json_encode($step);
+            exit;
+        }
+    }
+
+    public function actionGet_total(){
+        if(Yii::$app->request->post()){
+            $step_id = $_POST['step_id'];
+            $worker_no = $_POST['worker_no'];
+            $date = strtotime(date("Y-m-d",time()));
+            $total_num = 0;
+            $total = Worker_step::find()->where("step_id =".$step_id)->andWhere("worker_no like '".$worker_no."'")->andWhere("date <".$date)->asArray()->all();
+            if(!empty($total)) {
+                foreach ($total as $val):
+                    $total_num += $val['actual_num'];
+                endforeach;
+            }
+            echo $total_num;
             exit;
         }
     }

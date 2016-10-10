@@ -27,6 +27,9 @@
         <a href="index.php?r=step/add_notice">
             <button class="btn-danger">添加公告</button>
         </a>
+        <a href="index.php?r=staff">
+            <button class="btn-info">员工信息</button>
+        </a>
     </div>
     <div style="padding:10px;" align="center">
         组件类型：
